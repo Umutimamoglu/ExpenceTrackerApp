@@ -1,61 +1,43 @@
 
-import { View } from "react-native"
+import { View, StyleSheet, Text } from "react-native"
 import ExpensesSummary from "./ExpensesSummary"
 import ExpensesList from "./ExpensesList"
+import { GlobalStyles } from "../../constants/styles"
 
 
-const DUMMY_EXPENSE = [
+function ExpenseOutPut({ expenses, expensesPeriod, fallbackText }) {
 
-    {
-        id: e1,
-        description: 'a pair of shoes',
-        amount: 59.99,
-        date: new Date('2021-12-19')
-
-    },
+    let content = <Text style={styles.infoText}>{fallbackText}</Text>
 
 
-    {
-        id: e2,
-        description: 'a pair of traouseros',
-        amount: 69.99,
-        date: new Date('2021-11-19')
+    if (expenses.length > 0) {
+        content = <ExpensesList expenses={expenses} />
+    }
 
-    },
+    return (<View style={styles.container}>
+        <ExpensesSummary expenses={expenses} periodName={expensesPeriod} />
+        {content}
 
-    {
-        id: e3,
-        description: 'muz',
-        amount: 5.99,
-        date: new Date('2021-6-2')
-
-    },
-
-    {
-        id: e4,
-        description: 'book',
-        amount: 14.99,
-        date: new Date('2024-4-30')
-
-    },
-
-    {
-        id: e5,
-        description: 'socks',
-        amount: 9.99,
-        date: new Date('2021-12-19')
-
-    },
-]
-
-
-function ExpenseOutPut({ expenses, expensesPeriod }) {
-    return <View>
-        <ExpensesSummary expenses={DUMMY_EXPENSE} periodName={expensesPeriod} />
-        <ExpensesList />
 
     </View>
+
+    )
 }
 
 
 export default ExpenseOutPut
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingHorizontal: 24,
+        backgroundColor: GlobalStyles.colors.primary700
+    },
+    infoText: {
+        color: 'white',
+        fontSize: 16,
+        textAlign: 'center',
+        marginTop: 32
+    }
+})
