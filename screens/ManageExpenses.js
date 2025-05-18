@@ -23,6 +23,7 @@ function ManageExpenses({ route, navigation }) {
     const selectedExpense = expensesCtx.expenses.find(
         (expenses) => expenses.id === editedExpenseId
     )
+    console.log("asfsdfdsfd");
 
     useLayoutEffect(() => {
         navigation.setOptions({
